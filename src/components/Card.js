@@ -1,30 +1,35 @@
 import React from 'react'
 
-const Card = props => {
+export default class Card extends React.Component {
+  url = React.onBtnClick()
 
-class HyperLink extends Card {
-
-  constructor(){
-      super();
-      this._goToURL = this._goToURL.bind(this.blog);
+  state = {
+    value: this.props.blog
   }
 
-  static propTypes = {
-    url: props.blog.isRequired,
+ onBtnClick = event => {
+    event.preventDefault()
+
+    this.setState(
+      state => ({
+        value: this.props.blog
+      }),
+      () => (this.url = '')
+    )
+  }
+
+  render(props) {
+
+  return (
+    <a href={props.blog}>
+    <div style={{ margin: '1em' }}>
+      <img alt="avatar" style={{ width: '70px' }} src={props.avatar_url} />
+      <div>
+        <div style={{ fontWeight: 'bold' }}>{props.name}</div>
+        <div>{props.blog}</div>
+      </div>
+      </div>
+      </a>
+   )
   }
 }
-
-    return(
-      <div style={{ margin: '1em' }}>
-        <img alt="avatar" style={{ width: '70px' }} src={props.avatar_url} />
-          <div>
-           <div style={{ fontWeight: 'bold' }}>{props.name}</div>
-             <div>{props.blog.url}</div>
-             <HyperLink />
-          </div>
-      </div>
-
-    );
-  }
-
-  export default Card
